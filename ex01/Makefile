@@ -1,0 +1,2 @@
+NAME	= phonebook
+CPP		= c++

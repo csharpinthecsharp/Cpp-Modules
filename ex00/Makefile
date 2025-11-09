@@ -1,5 +1,5 @@
 NAME	= megaphone
-CPP		= clang++
+CPP		= c++
 CFLAGS	= -std=c++98 -Wall -Wextra -Werror
 
 SRCS	= megaphone.cpp \
