@@ -15,14 +15,7 @@ int check_sel(std::string& sel, PhoneBook& phoneb)
     std::string str;
     if (sel == "ADD") {
         str = prompt_me();
-        if (phoneb.nb_contacts == 8) {
-
-            phoneb.contacts[8] = str;
-        }
-        else {
-            phoneb.contacts[phoneb.nb_contacts] = str;
-            phoneb.nb_contacts+=1;
-        }
+        phoneb.add(str);
     }
     else if (sel == "SEARCH") {
         str = prompt_me();
@@ -40,7 +33,7 @@ int check_sel(std::string& sel, PhoneBook& phoneb)
 
 int main(int ac, char **av)
 {
-    PhoneBook phoneb;
+    PhoneBook
     while (1) {
         std::string sel;
         std::cout << "Please type: ADD, SEARCH or EXIT" << "\n";
