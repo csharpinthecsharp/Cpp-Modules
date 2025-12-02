@@ -1,6 +1,6 @@
 #include "phonebook.class.hpp"
 
-void PhoneBook::add(const Contact& c){
+void PhoneBook::add( const Contact& c ){
     if (nb_contacts == MAX_CONTACT) {
         std::cout << "Max contacts reached, last one was replaced." << "\n";
         contacts[MAX_CONTACT - 1] = c;
