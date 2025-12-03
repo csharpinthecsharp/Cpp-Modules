@@ -15,7 +15,10 @@ class Contact
 
         Contact( void ) {}; // Default constructor
         ~Contact( void ) {}; // Destructor
-        
+
+        Contact getter( void );
+        std::string formater( std::string string );
+
         Contact(std::string f_n, std::string l_n, std::string nn, std::string pn, std::string ds) {
             first_name = f_n;
             last_name = l_n;
@@ -25,14 +28,18 @@ class Contact
         } // Parameterized Constructor
 };
 
-
 class PhoneBook
 {
     public:
+
+        PhoneBook( void ) {};
+        ~PhoneBook( void ) {};
+        
         Contact contacts[MAX_CONTACT];
         int nb_contacts = 0;
 
         void add(const Contact& c);
+        void search( void );
 };
 
 #endif
