@@ -7,6 +7,7 @@
 std::string get_single(std::string name);
 Contact get_infos();
 int get_num();
-bool ft_is_singledigit(std::string input);
+bool is_singledigit(std::string input);
+std::string transform_string(std::string string);
 
 #endif

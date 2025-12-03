@@ -30,7 +30,7 @@ int get_num()
     while (!res.length()) {
         std::cout << "Please type the contact you want to reach:\n";
         std::getline(std::cin, res);
-        if (!ft_is_singledigit(res)) {
+        if (!is_singledigit(res)) {
             std::cout << "Warning: expected a single digit." << "\n";
             return -1;
         }
