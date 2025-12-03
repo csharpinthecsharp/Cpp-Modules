@@ -17,7 +17,7 @@ class Contact
         ~Contact( void ) {}; // Destructor
 
         Contact getter( void );
-        std::string formater( std::string string );
+        std::string formater( std::string& string );
 
         Contact(std::string f_n, std::string l_n, std::string nn, std::string pn, std::string ds) {
             first_name = f_n;

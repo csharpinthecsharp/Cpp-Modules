@@ -52,7 +52,7 @@ Contact Contact::getter( void )
     return c;
 }
 
-std::string Contact::formater( std::string string )
+std::string Contact::formater( std::string& string )
 {
     if (string.length() > 10)
         return string.substr(0, 9) + ".";

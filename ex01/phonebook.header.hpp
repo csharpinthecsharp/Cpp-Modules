@@ -5,7 +5,7 @@
 #include <iomanip>
 #include "phonebook.class.hpp"
 
-std::string get_single(std::string name);
+std::string get_single(const std::string& name);
 int get_num();
 
 #endif

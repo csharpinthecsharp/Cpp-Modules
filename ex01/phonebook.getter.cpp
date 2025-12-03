@@ -1,6 +1,6 @@
 #include "phonebook.header.hpp"
 
-std::string get_single(std::string name)
+std::string get_single(std::string& name)
 {
     std::string res;
     while (!res.length()) {
