@@ -7,6 +7,6 @@
 std::string get_single(std::string name);
 Contact get_infos();
 int get_num();
-bool ft_isdigit(std::string input);
+bool ft_is_singledigit(std::string input);
 
 #endif
