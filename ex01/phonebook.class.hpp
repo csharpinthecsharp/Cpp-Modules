@@ -3,6 +3,7 @@
 
 #define MAX_CONTACT 8
 #include "phonebook.header.hpp"
+#include "contact.class.hpp"
 
 class PhoneBook
 {

@@ -5,6 +5,7 @@ CFLAGS	= -std=c++98 -Wall -Wextra -Werror
 SRCS	= phonebook.cpp \
 		  phonebook.class.cpp \
 		  phonebook.getter.cpp \
+		  contact.class.cpp \
 
 OBJS	= $(SRCS:.cpp=.o)
 all: $(NAME)

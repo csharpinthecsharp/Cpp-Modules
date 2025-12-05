@@ -1,4 +1,5 @@
 #include "phonebook.header.hpp"
+#include "contact.class.hpp"
 
 int check_sel(std::string& sel, PhoneBook& phoneb)
 {
