@@ -3,7 +3,9 @@
 
 #include <string>
 #include <iomanip>
+#include <iostream>
 #include "phonebook.class.hpp"
+#include "contact.class.hpp"
 
 std::string get_single(const std::string& name);
 int get_num();
