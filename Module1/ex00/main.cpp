@@ -1,6 +1,8 @@
 #include "Zombie.hpp"
 
 int main( int ac, char **av ) {
+    // NOTE: FOO is allocated in the HEAP.
+    // NOTE: BAR is allocated in the STACK.
     Zombie zombie = Zombie();
     // Zombies that doesn't announces themselves!
     // They need to be allocated on the heap because
@@ -12,6 +14,7 @@ int main( int ac, char **av ) {
         name += std::to_string( i );
 
         Zombie* foo = zombie.newZombie( name );
+        zombie.announce(); // Not mandatory but keep track of the allocated one.
         delete foo;
     }
 
