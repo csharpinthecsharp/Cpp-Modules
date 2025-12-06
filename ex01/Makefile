@@ -2,10 +2,9 @@ NAME	= phonebook
 CPP		= c++
 CFLAGS	= -std=c++98 -Wall -Wextra -Werror
 
-SRCS	= phonebook.cpp \
-		  phonebook.class.cpp \
-		  phonebook.getter.cpp \
-		  contact.class.cpp \
+SRCS	= main.cpp \
+		  Phonebook.cpp \
+		  Contact.cpp \
 
 OBJS	= $(SRCS:.cpp=.o)
 all: $(NAME)

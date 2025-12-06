@@ -1,13 +1,10 @@
-#include "phonebook.header.hpp"
-#include "contact.class.hpp"
+#include "Phonebook.hpp"
 
 int check_sel(std::string& sel, PhoneBook& phoneb)
 {
-    Contact c;
     int num = -1;
     if (sel == "ADD") {
-        c = c.getter();
-        phoneb.add(c);
+        phoneb.add();
     }
     else if (sel == "SEARCH")
         phoneb.search();
@@ -25,6 +22,8 @@ int main(int ac, char **av)
         std::string sel;
         std::cout << "[PhoneBook] - Commands: ADD, SEARCH or EXIT" << "\n";
         std::getline(std::cin, sel);
+        if (std::cin.eof())
+            exit(EXIT_SUCCESS);
         if (sel.length()) {
             if (check_sel(sel, phoneb) == 1)
                 return (0);
