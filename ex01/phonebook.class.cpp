@@ -30,7 +30,7 @@ void PhoneBook::search( void )
         std::cout << std::setw(10) << contacts->formater(contacts[i].nickname);
         std::cout << "\n";
     }
-    while (num < 1 || num > 8)
+    while (num <= 0 || num >= 9)
         num = get_num();
     if (!contacts[num - 1].first_name.empty()) {
         std::cout << contacts[num - 1].first_name << "\n";
@@ -38,6 +38,8 @@ void PhoneBook::search( void )
         std::cout << contacts[num - 1].nickname << "\n";
         std::cout << contacts[num - 1].phone_number << "\n";
         std::cout << contacts[num - 1].darkest_secret << "\n";
+        return ;
     }
+    std::cout << "Warning: there is no contact at this index" << "\n";
 }
 
