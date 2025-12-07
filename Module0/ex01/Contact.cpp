@@ -29,11 +29,11 @@ std::string Contact::getDarkestSecret( void ) {
 }
 
 void Contact::create( void ) {
-    this->_first_name = ask_user("first name");
-    this->_last_name = ask_user("last name"); 
-    this->_nickname = ask_user("nickname"); 
-    this->_phone_number = ask_user("phone number");
-    this->_darkest_secret = ask_user("darkest secret");
+    _first_name = ask_user("first name");
+    _last_name = ask_user("last name"); 
+    _nickname = ask_user("nickname"); 
+    _phone_number = ask_user("phone number");
+    _darkest_secret = ask_user("darkest secret");
 }
 
 std::string Contact::ask_user( std::string name ) {
