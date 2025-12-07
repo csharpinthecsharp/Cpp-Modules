@@ -8,7 +8,9 @@
 class HumanA {
     private:
         std::string _name;
-        Weapon& _weapon;
+        Weapon& _weapon; // I use a reference,
+                         // because weapon is passed
+                         // in the constructor.
     public:
         HumanA( std::string name, Weapon& weapon );
         ~HumanA( void );
