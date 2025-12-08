@@ -37,7 +37,11 @@ void PhoneBook::add( void )
 }
 
 void PhoneBook::search( void ) {
-    int num = -1;
+    if (_nb_contacts == 0) {
+        std::cout << "Warning: You have no contact" << std::endl;
+        return ;
+    }
+    
     std::cout << "     Index" << "|";
     std::cout << "First Name" << "|";
     std::cout << " Last Name" << "|";
@@ -52,31 +56,30 @@ void PhoneBook::search( void ) {
         std::cout << std::setw(10) << contacts->format(getNickName(i));
         std::cout << "\n";
     }
-    while (num <= 0 || num >= 9) {
-        std::string res;
-        while (!res.length()) {
-            std::cout << "Please type the contact you want to reach:\n";
-            std::getline(std::cin, res);
-            if (std::cin.eof())
-                exit(EXIT_SUCCESS);
-            if (res.length() != 1 || !isdigit(res[0])) {
-                std::cout << "Warning: expected a single digit." << "\n";
-                break;
-            }
-            num = std::stoi(res);
-        }
-        if (num != -1 && (num <= 0 || num >= 9))
-            std::cout << "Warning: Out of range (1->8)" << std::endl;
-        if (num != -1) {
-            num = std::stoi(res);
-        }
+
+    std::string res;
+    std::cout << "Please type the contact you want to reach:" << std::endl;
+    std::getline(std::cin, res);
+    if (std::cin.eof())
+        exit(EXIT_SUCCESS);
+
+    if (res.length() != 1 || !isdigit(res[0])) {
+        std::cout << "Warning: Wrong input" << std::endl;
+        return ;
     }
-    if (getFirstName(num - 1).empty() == false) {
-        std::cout << "First Name: " << getFirstName(num - 1) << std::endl;
-        std::cout << "Last Name: " << getLastName(num - 1) << std::endl;
-        std::cout << "Nick Name: " << getNickName(num - 1) << std::endl;
-        std::cout << "Phone Number: " << getPhoneNumber(num - 1) << std::endl;
-        std::cout << "Darkest Secret: " << getDarkestSecret(num - 1) << std::endl;
+
+    int n_res = res[0] - '0';
+    if (n_res < 1 || n_res > 8) {
+        std::cout << "Warning: Out of range (1->8)" << std::endl;
+        return;
+    }
+    
+    if (getFirstName(n_res - 1).empty() == false) {
+        std::cout << "First Name: " << getFirstName(n_res - 1) << std::endl;
+        std::cout << "Last Name: " << getLastName(n_res - 1) << std::endl;
+        std::cout << "Nick Name: " << getNickName(n_res - 1) << std::endl;
+        std::cout << "Phone Number: " << getPhoneNumber(n_res - 1) << std::endl;
+        std::cout << "Darkest Secret: " << getDarkestSecret(n_res - 1) << std::endl;
     }
     else
         std::cout << "Warning: No contact at this index" << std::endl;

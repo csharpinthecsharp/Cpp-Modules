@@ -5,6 +5,8 @@
 #include "Contact.hpp"
 #include <iostream>
 #include <iomanip>
+#include <string>
+#include <cctype>
 
 class PhoneBook
 {
