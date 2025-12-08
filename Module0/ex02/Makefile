@@ -1,6 +1,3 @@
-LE ACCOUNT.CPP EST A 42, LE PLUS RECENT AVEC LE DISPLAY TIME.
-
-
 NAME	= account
 CPP		= c++
 CFLAGS	= -std=c++98 -Wall -Wextra -Werror

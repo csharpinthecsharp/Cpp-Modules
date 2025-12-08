@@ -32,7 +32,7 @@ void PhoneBook::add( void )
     else {
         contacts[_nb_contacts] = c;
         _nb_contacts+=1;
-        std::cout << "New contact added -> " << getNickName(_nb_contacts) << std::endl;
+        std::cout << "New contact added -> " << getNickName(_nb_contacts - 1) << std::endl;
     }
 }
 
@@ -61,20 +61,24 @@ void PhoneBook::search( void ) {
                 exit(EXIT_SUCCESS);
             if (res.length() != 1 || !isdigit(res[0])) {
                 std::cout << "Warning: expected a single digit." << "\n";
-                num = -1;
+                break;
             }
+            num = std::stoi(res);
         }
-        num = std::stoi(res);
         if (num != -1 && (num <= 0 || num >= 9))
             std::cout << "Warning: Out of range (1->8)" << std::endl;
+        if (num != -1) {
+            num = std::stoi(res);
+        }
     }
-    if (getFirstName(num + 1).empty()) {
-        std::cout << getFirstName(num + 1) << std::endl;
-        std::cout << getLastName(num + 1) << std::endl;
-        std::cout << getNickName(num + 1) << std::endl;
-        std::cout << getPhoneNumber(num + 1) << std::endl;
-        std::cout << getDarkestSecret(num + 1) << std::endl;
+    if (getFirstName(num - 1).empty() == false) {
+        std::cout << "First Name: " << getFirstName(num - 1) << std::endl;
+        std::cout << "Last Name: " << getLastName(num - 1) << std::endl;
+        std::cout << "Nick Name: " << getNickName(num - 1) << std::endl;
+        std::cout << "Phone Number: " << getPhoneNumber(num - 1) << std::endl;
+        std::cout << "Darkest Secret: " << getDarkestSecret(num - 1) << std::endl;
     }
-    std::cout << "Warning: No contact at this index" << std::endl;
+    else
+        std::cout << "Warning: No contact at this index" << std::endl;
 }
 
