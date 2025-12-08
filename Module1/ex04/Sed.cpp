@@ -40,6 +40,7 @@ void Sed::findAndReplace( void ) {
         newLine.append( line.substr(last_pos) );
         writeNewLine( newLine );
     }
+    is.close();
 }
 
 void Sed::writeNewLine( std::string line ) {
@@ -47,4 +48,5 @@ void Sed::writeNewLine( std::string line ) {
     // out -> Output mode.
     std::ofstream os( _filename+".replace", std::ios::out | std::ios::app );
     os.write( line.data(), line.length() );
+    os.close();
 }
