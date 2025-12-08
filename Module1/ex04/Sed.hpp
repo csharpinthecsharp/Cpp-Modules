@@ -15,6 +15,8 @@ class Sed {
         ~Sed( void );
 
         bool isExist( void );
+        void findAndReplace( void );
+        void writeNewLine( std::string line );
 };
 
 #endif

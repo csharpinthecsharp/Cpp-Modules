@@ -9,4 +9,5 @@ int main(int ac, char **av) {
 	Sed sed = Sed(av[1], av[2], av[3]);
 	if (!sed.isExist())
 		return 1;
+	sed.findAndReplace();
 }
