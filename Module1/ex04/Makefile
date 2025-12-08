@@ -1,4 +1,4 @@
-NAME	= better_sed
+NAME	= sed
 CPP		= c++
 CFLAGS	= -std=c++98 -Wall -Wextra -Werror
 
