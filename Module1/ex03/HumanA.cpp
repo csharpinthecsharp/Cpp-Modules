@@ -5,7 +5,7 @@ HumanA::HumanA( std::string name, Weapon& weapon )
                                       // needs to be initialised at
                                       // the moment the containing obj
                                       // is constructed.
-                                      // so it cannot be init inside {}.
+                                      // because it cannot be init inside {}.
 
 HumanA::~HumanA( void ) {
 }

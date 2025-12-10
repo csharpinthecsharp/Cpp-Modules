@@ -29,10 +29,10 @@ void Harl::error( void ) {
 }
 
 void Harl::complain( std::string level ) {
-    void ( Harl::*pmf[4] )() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
+    void ( Harl::*pmf[4] )() = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
     
     int levelAsInt = 0;
-    if (isdigit(level[0]) && (level[0] - '0') < 4)
+    if ( level.length() == 1 && isdigit( level[0] ) && ( level[0] - '0' ) < 4 )
         levelAsInt = level[0] - '0';
-    (this->*pmf[levelAsInt])();
+    ( this->*pmf[levelAsInt] )();
 }
