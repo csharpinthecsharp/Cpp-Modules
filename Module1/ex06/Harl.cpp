@@ -28,7 +28,7 @@ void Harl::error( void ) {
     std::cout << "" << std::endl;
 }
 
-void Harl::ml_complain( int request ) {
+void Harl::propage( int request ) {
     void ( Harl::*pmf[4])() = { &Harl::debug, &Harl::info, &Harl::warning, &Harl::error };
     while (request < 4) {
         (this->*pmf[request])();
@@ -47,16 +47,16 @@ void Harl::complain( std::string level ) {
 
     switch (request) {
         case 0:
-            ml_complain(0);
+            propage(0);
             break;
         case 1:
-            ml_complain(1);
+            propage(1);
             break;
         case 2:
-            ml_complain(2);
+            propage(2);
             break;
         case 3:
-            ml_complain(3);
+            propage(3);
             break;
         default:
             std::cout << "[ Probably complaining about insignificant problem ]" << std::endl;

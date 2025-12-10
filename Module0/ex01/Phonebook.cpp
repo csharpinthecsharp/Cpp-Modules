@@ -71,7 +71,7 @@ void PhoneBook::search( void ) {
     int n_res = res[0] - '0';
     if (n_res < 1 || n_res > 8) {
         std::cout << "Warning: Out of range (1->8)" << std::endl;
-        return;
+        return ;
     }
     
     if (getFirstName(n_res - 1).empty() == false) {

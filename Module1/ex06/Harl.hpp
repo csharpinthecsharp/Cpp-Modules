@@ -11,7 +11,7 @@ class Harl {
         void error( void );
     public:
         void complain( std::string level );
-        void ml_complain( int request );
+        void propage( int request );
 };
 
 #endif
