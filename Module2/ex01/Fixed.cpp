@@ -27,7 +27,6 @@ Fixed &Fixed::operator=( const Fixed& fix) {
 } // copy assignement operator
 
 /* MEMBERS FUNCTIONS */
-
 int Fixed::getRawBits( void ) const {
     std::cout << "getRawBits member function called" << std::endl;
     return _value;
