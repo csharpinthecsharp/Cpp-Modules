@@ -20,21 +20,13 @@ Fixed::Fixed( const int ci ) {
 Fixed::~Fixed( void ) {
 } // destructor
 
-Fixed &operator=( const Fixed& fix) {
+Fixed &Fixed::operator=( const Fixed& fix) {
     if (this != &fix)
         setRawBits(fix.getRawBits());
     return *this;
 } // copy assignement operator
 
 /* MEMBERS FUNCTIONS */
-
-float toFloat( void ) const {
-    return static_cast<float>(getRawBits());
-}
-
-int toInt( void ) const {
-    return getRawBits();
-}
 
 int Fixed::getRawBits( void ) const {
     std::cout << "getRawBits member function called" << std::endl;
@@ -43,4 +35,12 @@ int Fixed::getRawBits( void ) const {
 
 void Fixed::setRawBits( int const raw ) {
     _value = raw;
+}
+
+float Fixed::toFloat( void ) const {
+    return static_cast<float>(getRawBits());
+}
+
+int Fixed::toInt( void ) const {
+    return getRawBits();
 }
