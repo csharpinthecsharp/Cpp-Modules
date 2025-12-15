@@ -11,12 +11,12 @@ Fixed::Fixed ( const Fixed& fix ) : _value(fix._value) {
     std::cout << "Copy constructor called" << std::endl;
 } // copy constructor
 
-Fixed::Fixed( const float cf ) {
+Fixed::Fixed( const float& cf ) {
     std::cout << "Float constructor called" << std::endl;
     setRawBits(roundf(cf * (1 << _bits)));
 }
 
-Fixed::Fixed( const int ci ) {
+Fixed::Fixed( const int& ci ) {
     std::cout << "Int constructor called" << std::endl;
     setRawBits(ci << _bits);
 }
@@ -42,7 +42,7 @@ int Fixed::getRawBits( void ) const {
     return _value;
 }
 
-void Fixed::setRawBits( int const raw ) {
+void Fixed::setRawBits( int const& raw ) {
     _value = raw;
 }
 

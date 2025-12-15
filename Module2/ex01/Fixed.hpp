@@ -11,16 +11,16 @@ class Fixed {
         static const int _bits;
     public:
         Fixed( void );
-        Fixed( const float cf);
-        Fixed( const int ci );
-        Fixed( const Fixed& fix ); // copy constructor
+        explicit Fixed( const float& cf);
+        explicit Fixed( const int& ci );
+        explicit Fixed( const Fixed& fix ); // copy constructor
         ~Fixed( void );
         
         Fixed &operator=( const Fixed& fix); // copy assignement operator
         float toFloat( void ) const;
         int toInt( void ) const;
         int getRawBits( void ) const;
-        void setRawBits( int const raw );
+        void setRawBits( int const& raw );
 };
 
 std::ostream& operator<<( std::ostream& os, const Fixed& fix);
