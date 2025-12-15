@@ -32,11 +32,6 @@ Fixed &Fixed::operator=( const Fixed& fix ) {
     return *this;
 } // copy assignement operator
 
-std::ostream& operator<<( std::ostream& os, const Fixed& fix) {
-    os << fix.toFloat();
-    return os;
-}
-
 /* MEMBERS FUNCTIONS */
 int Fixed::getRawBits( void ) const {
     return _value;
@@ -52,4 +47,9 @@ float Fixed::toFloat( void ) const {
 
 int Fixed::toInt( void ) const {
     return getRawBits() >> _bits;
+}
+
+std::ostream& operator<<( std::ostream& os, const Fixed& fix) {
+    os << fix.toFloat();
+    return os;
 }
