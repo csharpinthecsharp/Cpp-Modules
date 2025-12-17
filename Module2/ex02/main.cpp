@@ -24,6 +24,14 @@ int main( void ) {
     std::cout << "<=operator=" << i << std::endl;
     std::cout << "==operator=" << j << std::endl;
     std::cout << "!=operator=" << k << std::endl;
-
+    std::cout << "Value without edit: " << a << std::endl;
+    std::cout << "Value as pre increment " << ++a << std::endl;
+    std::cout << "Value without edit: " << a<< std::endl;
+    std::cout << "Value as post increment " << a++ << std::endl;
+    std::cout << "Value without edit: " << a<< std::endl;
+    std::cout << "Value as pre decrement " << --a << std::endl;
+    std::cout << "Value without edit: " << a << std::endl;
+    std::cout << "Value as post decrement " << a-- << std::endl;
+    std::cout << "Value without edit: " << a << std::endl;
     return 0;
 }

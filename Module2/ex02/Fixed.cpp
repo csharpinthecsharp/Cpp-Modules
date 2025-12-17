@@ -44,6 +44,30 @@ Fixed Fixed::operator-( const Fixed& fix ) const {
 Fixed Fixed::operator/( const Fixed& fix ) const {
     return this->toFloat() / fix.toFloat();
 }
+
+// PRE INCREMENT ++obj
+Fixed &Fixed::operator++() {
+    ++this->_value;
+    return *this;
+}
+
+Fixed &Fixed::operator--() {
+    --this->_value;
+    return *this;
+}
+// POST INCREMENT obj++
+Fixed Fixed::operator++( int ) {
+    Fixed temp_fix = *this;
+    ++this->_value;
+    return temp_fix;
+}
+
+Fixed Fixed::operator--( int ) {
+    Fixed temp_fix = *this;
+    --this->_value;
+    return temp_fix;
+}
+
  // END OF ARITHMETIC OPERATORS
 
  /* COMPARISON OPERATORS */

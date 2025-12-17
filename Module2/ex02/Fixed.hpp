@@ -27,15 +27,23 @@ class Fixed {
         Fixed operator+( const Fixed& fix ) const;
         Fixed operator-( const Fixed& fix ) const;
         Fixed operator/( const Fixed& fix ) const;
+
+        // PRE INCREMENT ++obj
+        Fixed &operator++();
+        Fixed &operator--();
+        // POST INCREMENT obj++
+        Fixed operator++( int );
+        Fixed operator--( int ); 
+
         /* COMPARISON OPERATORS */
         bool operator>( const Fixed& fix ) const;
         bool operator<( const Fixed& fix) const;
         bool operator>=( const Fixed& fix ) const;
         bool operator<=( const Fixed& fix) const;
         bool operator==( const Fixed& fix ) const;
-        bool operator!=( const Fixed& fix) const;
+        bool operator!=( const Fixed& fix) const; // END COMPARISON OPERATORS
 };
 
 std::ostream& operator<<( std::ostream& os, const Fixed& fix);
 
-#endif
+#endif // FIXED_HPP
