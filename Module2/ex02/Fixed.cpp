@@ -95,6 +95,29 @@ bool Fixed::operator!=( const Fixed& fix) const {
     return this->toFloat() != fix.toFloat();
 }
  // END OF COMPARISON OPERATORS
+Fixed &Fixed::min( Fixed& fix, Fixed& fix2 ) {
+    if (fix > fix2)
+        return fix2;
+    return fix;
+}
+
+const Fixed &Fixed::min ( const Fixed& fix, const Fixed& fix2 ) {
+    if (fix > fix2)
+        return fix2;
+    return fix;
+}
+
+Fixed &Fixed::max ( Fixed& fix, Fixed& fix2 ) {
+    if (fix > fix2)
+        return fix;
+    return fix2;
+}
+
+const Fixed &Fixed::max ( const Fixed& fix, const Fixed& fix2 ) {
+    if (fix > fix2)
+        return fix;
+    return fix2;   
+}
 
 int Fixed::getRawBits( void ) const {
     return _value;

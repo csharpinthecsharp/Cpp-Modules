@@ -14,6 +14,7 @@ int main( void ) {
     Fixed const k( Fixed( 5.05f ) != Fixed( 2 ) );
 
     std::cout << "raw=" << a << std::endl;
+
     std::cout << "*operator=" << b << std::endl;
     std::cout << "-operator=" << c << std::endl;
     std::cout << "+operator=" << d << std::endl;
@@ -24,6 +25,7 @@ int main( void ) {
     std::cout << "<=operator=" << i << std::endl;
     std::cout << "==operator=" << j << std::endl;
     std::cout << "!=operator=" << k << std::endl;
+
     std::cout << "Value without edit: " << a << std::endl;
     std::cout << "Value as pre increment " << ++a << std::endl;
     std::cout << "Value without edit: " << a<< std::endl;
@@ -33,5 +35,13 @@ int main( void ) {
     std::cout << "Value without edit: " << a << std::endl;
     std::cout << "Value as post decrement " << a-- << std::endl;
     std::cout << "Value without edit: " << a << std::endl;
+
+    /* Const usage, because we don't want to modify the value [ReadOnly]*/
+    std::cout << Fixed::max( a, b ) << std::endl;
+    std::cout << Fixed::min( a, b ) << std::endl;
+    /* Non-const usage, because we want to modify the value */
+    std::cout << a << std::endl;
+    a = Fixed::max( a, b );
+    std::cout << a << std::endl;
     return 0;
 }

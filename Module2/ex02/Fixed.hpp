@@ -42,6 +42,11 @@ class Fixed {
         bool operator<=( const Fixed& fix) const;
         bool operator==( const Fixed& fix ) const;
         bool operator!=( const Fixed& fix) const; // END COMPARISON OPERATORS
+
+        static Fixed &min( Fixed& fix, Fixed& fix2 );
+        static Fixed const &min ( const Fixed& fix, const Fixed& fix2 );
+        static Fixed &max ( Fixed& fix, Fixed& fix2 );
+        static Fixed const &max ( const Fixed& fix, const Fixed& fix2 );
 };
 
 std::ostream& operator<<( std::ostream& os, const Fixed& fix);
