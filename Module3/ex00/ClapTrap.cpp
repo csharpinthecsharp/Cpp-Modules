@@ -1,24 +1,101 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap() {
+ClapTrap::ClapTrap( const std::string &name ) 
+	: _energy(10), _health(10), _damage(0) {
+		std::cout << name << " just spawned in, say hello to him!" << std::endl;
+		_name = name;
 }
 
 ClapTrap::~ClapTrap() {
+	std::cout << _name << " decided to destroy himself.." << std::endl;
 }
 
-ClapTrap::ClapTrap( const ClapTrap& cp ) {
+ClapTrap::ClapTrap( const ClapTrap& cp ) 
+	: _energy(_energy), _health(_health), _damage(_damage){
+		*this = cp;
 }
 
-ClapTrap ClapTrap::&operator=( const ClapTrap& cp ) {
+ClapTrap &ClapTrap::operator=( const ClapTrap& cp ) {
+	if (this != &cp)
+		this->setEnergy(cp.getEnergy());
+		this->setDamage(cp.getDamage());
+		this->setHealth(cp.getHealth());
+	std::cout << this->_name << " have no personallity and stole the stats of " 
+		<< cp._name << ".." << std::endl;
+	return (*this);
 }
 
 void ClapTrap::attack( const std::string& target ) {
-
+	if (getEnergy() > 0 && getHealth() > 0) {
+		setEnergy(getEnergy() - 1);
+		std::cout << "[ClapTrap]: " << getName() 
+			<< " attacks " << target << " causing "
+				<< getDamage() << " points of damage! (-1 Energy=[" << getEnergy() << "]) " << std::endl;
+		return ;
+	}
+	std::cout << "[ClapTrap]: " << getName() << " cannot attack!" << std::endl;
 }
 
 void ClapTrap::takeDamage( unsigned int amount ) {
+	int r_amount = getHealth() - amount;
+	if (getHealth() == 0) {
+		std::cout << "[ClapTrap]: Hitting a dead body is a war crime.." << std::endl;
+		return ;
+	}
+	if (r_amount <= 0) {
+		std::cout << "[ClapTrap]: " << getName()
+			<< " took a fatal hit and..died :)" << std::endl;
+		setHealth(0);
+		return ;
+	}
+	setHealth(getHealth() - amount);
+	std::cout << "[ClapTrap]: " << getName() 
+		<< " lost " << amount << " HP! " << std::endl;
 }
 
-void beRepaired( unsigned int amount ) {
-	_health += amount;
+void ClapTrap::beRepaired( unsigned int amount ) {
+	if (getEnergy() > 0 && getHealth() > 0) {
+		setEnergy(getEnergy() - 1);
+		setHealth(getHealth() + amount);
+		std::cout << "[ClapTrap]: " << getName() 
+			<< " restored " << amount << " hp! (-1 Energy=[" << getEnergy() << "]) " << std::endl;
+		return ;
+	}
+	std::cout << "[ClapTrap]: " << getName() << " cannot repair himself!" << std::endl;
+}
+
+void ClapTrap::setEnergy( const int& value ) {
+	this->_energy = value;
+}
+void ClapTrap::setDamage( const int& value ) {
+	this->_damage = value;
+}
+
+void ClapTrap::setHealth( const int& value ) {
+	this->_health = value;
+}
+
+const int ClapTrap::getEnergy() const {
+	return this->_energy;
+}
+
+const int ClapTrap::getDamage() const {
+	return this->_damage;
+}
+
+const int ClapTrap::getHealth() const {
+	return this->_health;
+}
+
+const std::string ClapTrap::getName() const {
+	return this->_name;
+}
+
+std::ostream& operator<<( std::ostream& os, const ClapTrap& cp ) {
+	os << "------ STATS ------" << std::endl;
+	os << "Name: " << cp.getName() << std::endl;
+	os << "Health: " << cp.getHealth() << std::endl;
+	os << "Energy: " << cp.getEnergy() << std::endl;
+	os << "Damage: " << cp.getDamage() << std::endl;
+	return os;
 }
