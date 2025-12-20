@@ -6,7 +6,7 @@
 class Fixed {
     private:
         int _fix_point;
-        static const int _fract_bits;
+        static const int _bits;
     public:
         Fixed( void ); // Default Constructor
         Fixed( const Fixed& fix ); // Copy constructor
