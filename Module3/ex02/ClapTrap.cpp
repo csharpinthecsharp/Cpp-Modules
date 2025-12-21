@@ -12,6 +12,7 @@ ClapTrap::~ClapTrap() {
 
 ClapTrap::ClapTrap( const ClapTrap& cp ) 
 	: _energy(_energy), _health(_health), _damage(_damage){
+		std::cout << "ClapTrap copy constructor called" << std::endl;
 		*this = cp;
 }
 
@@ -21,7 +22,7 @@ ClapTrap &ClapTrap::operator=( const ClapTrap& cp ) {
 		this->setEnergy(cp.getEnergy());
 		this->setDamage(cp.getDamage());
 		this->setHealth(cp.getHealth());
-	std::cout << "Copy assignement operator called" << std::endl
+	std::cout << "ClapTrap copy assignement operator called" << std::endl;
 	return (*this);
 }
 
