@@ -25,7 +25,13 @@ ScavTrap &ScavTrap::operator=( const ScavTrap& st ) {
 }
 
 void ScavTrap::guardGuate() {
-    std::cout << "ScavTrap is now in gate keeper mode" << std::endl;
+    if (!_guard) {
+        _guard = true;
+        std::cout << "ScavTrap is now in gate keeper mode" << std::endl;
+        return ;
+    }
+    std::cout << "ScavTrap is already in gate keeper mode" << std::endl;
+    return ;
 }
 
 

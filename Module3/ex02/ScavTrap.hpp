@@ -4,6 +4,8 @@
 #include "ClapTrap.hpp"
 
 class ScavTrap : public ClapTrap {
+    private:
+        bool _guard;
     public:
         ScavTrap( const std::string& name );
         ScavTrap( const ScavTrap& st );
