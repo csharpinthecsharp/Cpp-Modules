@@ -34,23 +34,23 @@ void ClapTrap::attack( const std::string& target ) {
 				<< getDamage() << " points of damage! (-1 Energy=[" << getEnergy() << "]) " << std::endl;
 		return ;
 	}
-	std::cout << "[ClapTrap]: " << getName() << " cannot attack!" << std::endl;
+	std::cout << getName() << " cannot attack!" << std::endl;
 }
 
 void ClapTrap::takeDamage( unsigned int amount ) {
 	int r_amount = getHealth() - amount;
 	if (getHealth() == 0) {
-		std::cout << "[ClapTrap]: Hitting a dead body is a war crime.." << std::endl;
+		std::cout << "Hitting a dead body is a war crime.." << std::endl;
 		return ;
 	}
 	if (r_amount <= 0) {
-		std::cout << "[ClapTrap]: " << getName()
+		std::cout << getName()
 			<< " took a fatal hit and..died :)" << std::endl;
 		setHealth(0);
 		return ;
 	}
 	setHealth(getHealth() - amount);
-	std::cout << "[ClapTrap]: " << getName() 
+	std::cout << getName() 
 		<< " lost " << amount << " HP! " << std::endl;
 }
 
@@ -58,11 +58,11 @@ void ClapTrap::beRepaired( unsigned int amount ) {
 	if (getEnergy() > 0 && getHealth() > 0) {
 		setEnergy(getEnergy() - 1);
 		setHealth(getHealth() + amount);
-		std::cout << "[ClapTrap]: " << getName() 
+		std::cout << getName() 
 			<< " restored " << amount << " hp! (-1 Energy=[" << getEnergy() << "]) " << std::endl;
 		return ;
 	}
-	std::cout << "[ClapTrap]: " << getName() << " cannot repair himself!" << std::endl;
+	std::cout << getName() << " cannot repair himself!" << std::endl;
 }
 
 void ClapTrap::setEnergy( const int& value ) {

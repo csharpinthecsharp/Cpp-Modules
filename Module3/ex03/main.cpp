@@ -1,11 +1,11 @@
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main( int ac, char **av ) {
-	ClapTrap cp("Player0");
+	ClapTrap cp("ClapTrapPayer");
 	cp.attack("Alien");
 
-	ScavTrap st("Player1");
-	FragTrap ft("Player5");
+	ScavTrap st("ScavTrapPlayer");
+	FragTrap ft("FragTrapPlayer");
 
 	std::cout << "" << std::endl;
 	ft.highFivesGuys();
@@ -13,6 +13,7 @@ int main( int ac, char **av ) {
 	st.attack("Earth");
 	std::cout << "" << std::endl;
 
+	st.guardGuate();
 	st.guardGuate();
 	std::cout << "" << std::endl;
 
@@ -24,5 +25,10 @@ int main( int ac, char **av ) {
 	std::cout << "" << std::endl;
 
 	std::cout << st_copy << std::endl;
+	
+	DiamondTrap dt("DiamondPlayer");
+	dt.attack("Trump");
+	std::cout << dt << std::endl;
+	dt.whoAmI();
 	return 0;
 }

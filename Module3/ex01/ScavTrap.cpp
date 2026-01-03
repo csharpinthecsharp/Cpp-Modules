@@ -1,6 +1,6 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap( const std::string& name ) : ClapTrap("Player1") {
+ScavTrap::ScavTrap( const std::string& name ) : ClapTrap(name) {
     std::cout << "ScavTrap constructor called" << std::endl;
     this->_name = name;
     this->_energy = 50;
@@ -43,10 +43,10 @@ ScavTrap::~ScavTrap() {
 void ScavTrap::attack( const std::string& target ) {
 	if (getEnergy() > 0 && getHealth() > 0) {
 		setEnergy(getEnergy() - 1);
-		std::cout << "[ScavTrap]: " << getName() 
+		std::cout << getName() 
 			<< " attacks " << target << " causing "
 				<< getDamage() << " points of damage! (-1 Energy=[" << getEnergy() << "]) " << std::endl;
 		return ;
 	}
-	std::cout << "[ScavTrap]: " << getName() << " cannot attack!" << std::endl;
+	std::cout << getName() << " cannot attack!" << std::endl;
 }
