@@ -1,67 +1,70 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap( const std::string &name ) 
-	: _energy(10), _health(10), _damage(0) {
-    	std::cout << "ClapTrap constructor called" << std::endl;
-		_name = name;
+	: _name(name), _energy(10), _health(10), _damage(0) {
+    	std::cout << MAGENTA BOLD << "[ClapTrap]: " << RESET << "constructor called" << std::endl;
 }
 
 ClapTrap::~ClapTrap() {
-    std::cout << "ClapTrap destructor called" << std::endl;
+    std::cout << MAGENTA BOLD << "[ClapTrap]: " << RESET <<
+	 "destructor called" << std::endl;
 }
 
-ClapTrap::ClapTrap( const ClapTrap& cp ) 
-	: _energy(_energy), _health(_health), _damage(_damage){
+ClapTrap::ClapTrap( const ClapTrap& cp ) {
+		std::cout << MAGENTA BOLD <<"[ClapTrap]: " << RESET<<
+		 "copy constructor called" << std::endl;
 		*this = cp;
 }
 
 ClapTrap &ClapTrap::operator=( const ClapTrap& cp ) {
-	if (this != &cp)
+	if (this != &cp) {
 		this->setName(cp.getName());
 		this->setEnergy(cp.getEnergy());
 		this->setDamage(cp.getDamage());
 		this->setHealth(cp.getHealth());
-	std::cout << "Copy assignement operator called" << std::endl
+	}
+	std::cout << MAGENTA BOLD << "[ClapTrap]: " << RESET <<
+	 "copy assignment operator called" << std::endl;
 	return (*this);
 }
 
 void ClapTrap::attack( const std::string& target ) {
 	if (getEnergy() > 0 && getHealth() > 0) {
 		setEnergy(getEnergy() - 1);
-		std::cout << "[ClapTrap]: " << getName() 
-			<< " attacks " << target << " causing "
+		std::cout << MAGENTA BOLD << "[ClapTrap]: " << RESET << getName() << " attacks " << target << " causing "
 				<< getDamage() << " points of damage! (-1 Energy=[" << getEnergy() << "]) " << std::endl;
 		return ;
 	}
-	std::cout << "[ClapTrap]: " << getName() << " cannot attack!" << std::endl;
+	std::cout << MAGENTA BOLD << "[ClapTrap]: " << RESET << getName() << " cannot attack, he's dead!" << std::endl;
 }
 
 void ClapTrap::takeDamage( unsigned int amount ) {
 	int r_amount = getHealth() - amount;
 	if (getHealth() == 0) {
-		std::cout << "[ClapTrap]: Hitting a dead body is a war crime.." << std::endl;
+		std::cout << MAGENTA BOLD << "[ClapTrap]: " << RESET << getName() << " is already dead!" << std::endl;
 		return ;
 	}
 	if (r_amount <= 0) {
-		std::cout << "[ClapTrap]: " << getName()
-			<< " took a fatal hit and..died :)" << std::endl;
+		std::cout << MAGENTA BOLD << "[ClapTrap]: " << RESET << getName()
+			<< " took a fatal hit and..died.." << std::endl;
 		setHealth(0);
 		return ;
 	}
 	setHealth(getHealth() - amount);
-	std::cout << "[ClapTrap]: " << getName() 
-		<< " lost " << amount << " HP! " << std::endl;
+	std::cout << MAGENTA BOLD << "[ClapTrap]: " << RESET << getName() 
+		<< " took a hit! " << "(-" << amount << ") Health=[" << getHealth() << "]) " << std::endl;
+	return ;
 }
 
 void ClapTrap::beRepaired( unsigned int amount ) {
 	if (getEnergy() > 0 && getHealth() > 0) {
 		setEnergy(getEnergy() - 1);
 		setHealth(getHealth() + amount);
-		std::cout << "[ClapTrap]: " << getName() 
+		std::cout << MAGENTA BOLD "[ClapTrap]: " << RESET << getName() 
 			<< " restored " << amount << " hp! (-1 Energy=[" << getEnergy() << "]) " << std::endl;
 		return ;
 	}
-	std::cout << "[ClapTrap]: " << getName() << " cannot repair himself!" << std::endl;
+	std::cout << MAGENTA BOLD "[ClapTrap]: " << RESET << getName() << " cannot repair himself, he's dead!" << std::endl;
 }
 
 void ClapTrap::setEnergy( const int& value ) {
@@ -96,11 +99,11 @@ const std::string ClapTrap::getName() const {
 }
 
 std::ostream& operator<<( std::ostream& os, const ClapTrap& cp ) {
-	os << "------ STATS ------" << std::endl;
-	os << "Name: " << cp.getName() << std::endl;
-	os << "Health: " << cp.getHealth() << std::endl;
-	os << "Energy: " << cp.getEnergy() << std::endl;
-	os << "Damage: " << cp.getDamage() << std::endl;
-	os << "------ ----- ------" << std::endl;
+	os << YELLOW BOLD << "------ STATS ------" << RESET << std::endl;
+	os << GREEN << "Name: " << CYAN << cp.getName() << RESET << std::endl;
+	os << GREEN << "Health: " << CYAN <<cp.getHealth() << RESET<< std::endl;
+	os << GREEN << "Energy: " << CYAN << cp.getEnergy() << RESET << std::endl;
+	os << GREEN << "Damage: " << CYAN << cp.getDamage() << RESET<< std::endl;
+	os << YELLOW BOLD "------ ----- ------" << RESET << std::endl;
 	return os;
 }

@@ -1,23 +1,21 @@
 #include "ClapTrap.hpp"
 
 int main( int ac, char **av ) {
-	ClapTrap cp("Player1");
-	ClapTrap cp_copy("Player3");
-	std::cout << "" << std::endl;
-
-	cp.attack("Player2");
-	cp.beRepaired(21);
-	cp.takeDamage(20);
-	cp.takeDamage(11);
-	cp.attack("Player2");
-	cp.takeDamage(100);
-	std::cout << "" << std::endl;
-
+	ClapTrap cp("Kevin");
 	std::cout << cp << std::endl;
+	cp.attack("Eeath");
+	std::cout << cp << std::endl;
+	cp.takeDamage(9);
+	cp.beRepaired(1);
+	std::cout << cp << std::endl;
+	cp.takeDamage(2);
 
-	cp_copy = cp;
-	std::cout << "" << std::endl;
+	ClapTrap cp_copy(cp);
+	std::cout << cp_copy << std::endl;
+	cp_copy.attack("Mars");
+	cp_copy.takeDamage(5);
 
+	cp_copy.beRepaired(1);
 	std::cout << cp_copy << std::endl;
 	return 0;
 }
