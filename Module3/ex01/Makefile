@@ -1,4 +1,4 @@
-NAME	= claptrap
+NAME	= scavtrap
 CPP	= c++
 CFLAGS	= -std=c++98 -g -Wall -Wextra -Werror
 
@@ -7,7 +7,15 @@ SRCS	= main.cpp \
 	  ScavTrap.cpp  \
 
 OBJS	= $(SRCS:.cpp=.o)
+
+GREEN = \033[0;32m
+BOLD = \033[1m
+RESET = \033[0m
+
 all: $(NAME)
+	@echo ""
+	@echo "$(GREEN)$(BOLD) ==== ./scavtrap to run ===="
+	@echo ""
 
 $(NAME): $(OBJS)
 	$(CPP) $(CFLAGS) -o $(NAME) $(OBJS)
