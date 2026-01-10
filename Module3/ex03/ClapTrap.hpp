@@ -4,6 +4,16 @@
 #include <iostream>
 #include <iomanip>
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define WHITE   "\033[37m"
+#define BOLD      "\033[1m"
+
 class ClapTrap {
 	protected:
 		int _energy;
@@ -20,9 +30,9 @@ class ClapTrap {
 		void takeDamage( unsigned int amount );
 		void beRepaired( unsigned int amount );
 
-		void setEnergy( const int& value );
-		void setDamage( const int& value );
-		void setHealth( const int& value );
+		void setEnergy( unsigned int value );
+		void setDamage( unsigned int value );
+		void setHealth( unsigned int value );
 		void setName( const std::string& value );
 		const int getEnergy() const;
 		const int getDamage() const;

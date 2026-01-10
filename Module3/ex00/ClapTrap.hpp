@@ -30,9 +30,9 @@ class ClapTrap {
 		void takeDamage( unsigned int amount );
 		void beRepaired( unsigned int amount );
 
-		void setEnergy( const int& value );
-		void setDamage( const int& value );
-		void setHealth( const int& value );
+		void setEnergy( unsigned int value );
+		void setDamage( unsigned int value );
+		void setHealth( unsigned int value );
 		void setName( const std::string& value );
 		const int getEnergy() const;
 		const int getDamage() const;

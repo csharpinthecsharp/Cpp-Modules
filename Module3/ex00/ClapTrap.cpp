@@ -67,14 +67,14 @@ void ClapTrap::beRepaired( unsigned int amount ) {
 	std::cout << MAGENTA BOLD "[ClapTrap]: " << RESET << getName() << " cannot repair himself, he's dead!" << std::endl;
 }
 
-void ClapTrap::setEnergy( const int& value ) {
+void ClapTrap::setEnergy( unsigned int value ) {
 	this->_energy = value;
 }
-void ClapTrap::setDamage( const int& value ) {
+void ClapTrap::setDamage( unsigned int value ) {
 	this->_damage = value;
 }
 
-void ClapTrap::setHealth( const int& value ) {
+void ClapTrap::setHealth( unsigned int value ) {
 	this->_health = value;
 }
 
