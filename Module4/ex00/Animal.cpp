@@ -1,10 +1,7 @@
 #include "Animal.hpp"
 
-Animal::Animal() : _type("default") {
+Animal::Animal() : _type("Animal") {
 
-}
-
-Animal::Animal( const std::string& type ) : _type(type) {
 }
 
 Animal::~Animal() {
@@ -21,13 +18,9 @@ Animal &Animal::operator=( const Animal& al ) {
     return *this;
 }
 
-void Animal::makeSound() {
-    if (_type == "dog")
-        std::cout << "Waf!" << std::endl;
-    else if (_type == "cat")
-        std::cout << "Meow!" << std::endl;
+void Animal::makeSound() const {
+    std::cout << "Animal talking!" << std::endl;
 }
-
 const std::string Animal::getType() const {
     return this->_type;
 }
