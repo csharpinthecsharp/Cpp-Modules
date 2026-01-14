@@ -12,6 +12,9 @@ class Brain {
         ~Brain();
         Brain( const Brain& bn );
         Brain &operator=( const Brain& bn );
+
+        const std::string& getIdeas( size_t index ) const;
+        void setIdeas( std::string& ideas );
 };
 
 #endif

@@ -5,7 +5,6 @@ Brain::Brain() {
 }
 
 Brain::~Brain() {
-    delete[] _ideas;
 }
 
 Brain::Brain( const Brain& bn ) {

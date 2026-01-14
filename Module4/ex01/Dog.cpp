@@ -2,10 +2,11 @@
 
 Dog::Dog() : Animal() {
     Animal::_type = "Dog";
+    this->_br = new Brain();
 }
 
 Dog::~Dog() {
-
+    delete this->_br;
 }
 
 Dog::Dog( const Dog& dg ) {
