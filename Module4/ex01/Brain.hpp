@@ -7,6 +7,7 @@
 class Brain {
     private:
         std::string _ideas[BRAIN_SIZE];
+        size_t _pos;
     public:
         Brain();
         ~Brain();
@@ -14,7 +15,7 @@ class Brain {
         Brain &operator=( const Brain& bn );
 
         const std::string& getIdeas( size_t index ) const;
-        void setIdeas( std::string& ideas );
+        void setIdeas( std::string ideas );
 };
 
 #endif

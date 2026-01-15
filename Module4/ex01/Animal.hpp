@@ -4,6 +4,8 @@
 #include <iomanip>
 #include <iostream>
 
+#include "Brain.hpp"
+
 class Animal {
     protected:
         std::string _type;
@@ -15,6 +17,7 @@ class Animal {
 
         virtual void makeSound() const;
         const std::string getType() const;
+        virtual Brain *getBrain() const = 0;
 };
 
 #endif
