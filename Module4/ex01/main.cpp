@@ -4,12 +4,10 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-#define NB_ANIMALS 4
-
 int main() {
     const Animal* al[NB_ANIMALS];
     for (int i = 0; i < NB_ANIMALS; i++) {
-        if (i > 1)
+        if (i >= NB_ANIMALS/2)
             al[i] = new Cat();
         else
             al[i] = new Dog();
@@ -27,8 +25,32 @@ int main() {
                 std::cout << al[i]->getBrain()->getIdeas(j) << std::endl;
         }
     }
+
+    // DEEP COPY CHECKING BALALALABAAAAA
+    Dog* dog = new Dog;
+    Cat* cat = new Cat;
+
+    cat->getBrain()->setIdeas("GTA6 en avance");
+    cat->getBrain()->setIdeas("100GB de Ram DDR5");
+    dog->getBrain()->setIdeas("Un os tout de suite");
+    dog->getBrain()->setIdeas("Une balle TOUT DE SUITE");
     
-    for (int i = 0; i < 4; i++) {
+    Dog* dogDeepCopy = new Dog(*dog);
+    Cat* catDeepCopy = new Cat(*cat);
+
+    std::cout << "=== Deep copy of the cat ===" << std::endl;
+    std::cout << catDeepCopy->getBrain()->getIdeas(0) << std::endl;
+    std::cout << catDeepCopy->getBrain()->getIdeas(1) << std::endl; 
+    std::cout << "=== Deep copy of the dog ===" << std::endl;  
+    std::cout << dogDeepCopy->getBrain()->getIdeas(0) << std::endl;   
+    std::cout << dogDeepCopy->getBrain()->getIdeas(1) << std::endl;
+
+    for (int i = 0; i < NB_ANIMALS; i++) {
         delete al[i];
     }
+
+    delete cat;
+    delete dog;
+    delete catDeepCopy;
+    delete dogDeepCopy;
 }

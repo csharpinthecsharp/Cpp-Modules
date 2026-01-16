@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <iostream>
 
+#define NB_ANIMALS 4
 #include "Brain.hpp"
 
 class Animal {
