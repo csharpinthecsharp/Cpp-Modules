@@ -1,7 +1,6 @@
-#include "IMateriaSource.hpp"
+#include "Character.hpp"
 #include "MateriaSource.hpp"
 #include "Ice.hpp"
-#include "Character.hpp"
 #include "Cure.hpp"
 
 int main() {
@@ -16,7 +15,7 @@ int main() {
     me->equip(tmp);
     tmp = src->createMateria("cure");
     me->equip(tmp);
-
+    
     ICharacter* bob = new Character("bob");
 
     me->use(0, *bob);
@@ -25,4 +24,6 @@ int main() {
     delete bob;
     delete me;
     delete src;
+
+    return (0);
 }

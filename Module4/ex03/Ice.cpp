@@ -1,8 +1,12 @@
 #include "Ice.hpp"
 
-Ice::Ice() : _type("ice"), AMateria(_type) { }
+Ice::Ice() : AMateria("ice") {
+    std::cout << "Ice constructor called." << std::endl;
+}
 
-Ice::~Ice() { }
+Ice::~Ice() {
+    std::cout << "Ice destructor called." << std::endl;
+}
 
 Ice::Ice( const Ice& ie ) : AMateria(ie) {
     *this = ie;
@@ -16,7 +20,7 @@ Ice &Ice::operator=( const Ice& ie ) {
 }
 
 AMateria* Ice::clone() const {
-    
+    return new Ice(*this);
 }
 void Ice::use( ICharacter& target ) {
     std::cout << "* shoot an " << this->getType() <<
