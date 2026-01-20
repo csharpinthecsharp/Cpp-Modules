@@ -17,3 +17,12 @@ Bureaucrat::~Bureaucrat() {
     std::cout << "Bureaucrat destructor called" << std::endl;
 }
 
+const char* Bureaucrat::GradeTooHighException::what() const noexcept {
+    return "Grade is too High";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const noexcept {
+    return "Grade is too Low";
+}
+
+
