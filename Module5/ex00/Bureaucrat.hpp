@@ -15,6 +15,11 @@ class Bureaucrat {
         Bureaucrat( unsigned int grade, const std::string& name );
         ~Bureaucrat();
 
+        const int getGrade() const;
+        const std::string getName() const;
+        void incrementGrade();
+        void decrementGrade();
+
         class GradeTooHighException : public std::exception {
             public:
                 const char* what() const noexcept override;
@@ -25,5 +30,7 @@ class Bureaucrat {
                 const char* what() const noexcept override;
         };
 };
+
+std::ostream &operator<<( std::ostream& os, const Bureaucrat& bt );
 
 #endif
