@@ -27,7 +27,11 @@ RobotomyRequestForm::~RobotomyRequestForm() {
     std::cout << "RobotomyRequestForm destructor called" << std::endl;
 }
 
-void RobotomyRequestForm::execTrigger() const {
+void RobotomyRequestForm::execute( const Bureaucrat& executor ) const {
+    if (!this->getSigned())
+        throw FormNotSignedException();
+    if (executor.getGrade() > this->getGradeExecute())
+        throw GradeTooHighException();
     std::cout << "BAM BAM BAM LE CHANTIER EST EN COURS!" << std::endl;
     std::cout << "LE GROS ROBOT EST EN CHANTIERRRRR!!!!" << std::endl;
     srand(time(NULL));

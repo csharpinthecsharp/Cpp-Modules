@@ -25,6 +25,8 @@ class Bureaucrat {
 
         void signForm( AForm& fm );
 
+        void executeForm(const AForm& form) const;
+
         class GradeTooHighException : std::exception {
             public:
                 const char* what() const noexcept override;

@@ -26,7 +26,11 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
     std::cout << "ShrubberyCreationForm destructor called" << std::endl;
 }
 
-void ShrubberyCreationForm::execTrigger() const {
+void ShrubberyCreationForm::execute( const Bureaucrat& executor ) const {
+    if (!this->getSigned())
+        throw FormNotSignedException();
+    if (executor.getGrade() > this->getGradeExecute())
+        throw GradeTooHighException();
     std::ofstream tree;
     tree.open(this->_target + "_shrubbery");
     if (!tree.is_open()) {

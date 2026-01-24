@@ -27,7 +27,11 @@ PresidentialPardonForm::~PresidentialPardonForm() {
     std::cout << "PresidentialPardonForm destructor called" << std::endl;
 }
 
-void PresidentialPardonForm::execTrigger() const {
+void PresidentialPardonForm::execute( const Bureaucrat& executor ) const {
+    if (!this->getSigned())
+        throw FormNotSignedException();
+    if (executor.getGrade() > this->getGradeExecute())
+        throw GradeTooHighException();
     std::cout << _target << " have been pardoned by Zaphod Beeblebrox!!!!" << std::endl;
     return ;
 }

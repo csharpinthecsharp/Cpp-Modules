@@ -93,7 +93,7 @@ void signed_test() {
 
         try {
             bt.signForm(sh);
-            sh.execute(bt);
+            bt.executeForm(sh);
         }
         catch (std::exception & e) {
             std::cout << e.what() << std::endl;
@@ -101,7 +101,7 @@ void signed_test() {
 
         try {
             be.signForm(rf);
-            rf.execute(be);
+            be.executeForm(rf);
         }
         catch (std::exception & e) {
             std::cout << e.what() << std::endl;
