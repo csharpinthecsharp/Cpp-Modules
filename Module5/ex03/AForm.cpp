@@ -1,6 +1,6 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
-Form::Form()
+AForm::AForm()
 : _name("Default_Form"),
 _signed(false),
 _grade_signed(150),
@@ -8,7 +8,7 @@ _grade_execute(150) {
     std::cout << "Form constructor called" << std::endl;
 }
 
-Form::Form( const std::string& name, const int grade_s, const int grade_e )
+AForm::AForm( const std::string& name, const int grade_s, const int grade_e )
 : _name(name),
 _signed(false),
 _grade_signed(grade_s),
@@ -20,41 +20,41 @@ _grade_execute(grade_e) {
     std::cout << "Form param constructor called" << std::endl;
 }
 
-Form::~Form() {
+AForm::~AForm() {
     std::cout << "Form destructor called" << std::endl;
 }
 
-Form::Form( const Form& fm )
+AForm::AForm( const AForm& fm )
 : _grade_signed(fm._grade_signed),
 _grade_execute(fm._grade_execute),
 _name(fm._name) {
     *this = fm;
 }
 
-Form &Form::operator=( const Form& fm ) {
+AForm &AForm::operator=( const AForm& fm ) {
     if (this != &fm) {
         this->_signed = fm._signed;
     }
     return *this;
 }
     
-const int Form::getGradeSigned() const {
+const int AForm::getGradeSigned() const {
     return this->_grade_signed;
 }
 
-const int Form::getGradeExecute() const {
+const int AForm::getGradeExecute() const {
     return this->_grade_execute;
 }
 
-const std::string Form::getName() const {
+const std::string AForm::getName() const {
     return this->_name;
 }
 
-const bool Form::getSigned() const {
+const bool AForm::getSigned() const {
     return this->_signed;
 }
 
-void Form::beSigned( const Bureaucrat& bt ) {
+void AForm::beSigned( const Bureaucrat& bt ) {
     if (this->getSigned()) { 
         throw FormAlreadySignedException();
         return ;
@@ -67,19 +67,23 @@ void Form::beSigned( const Bureaucrat& bt ) {
     return ;
 }
 
-const char* Form::GradeTooHighException::what() const noexcept {
+const char* AForm::GradeTooHighException::what() const noexcept {
     return "grade is too high";
 }
 
-const char* Form::GradeTooLowException::what() const noexcept {
+const char* AForm::GradeTooLowException::what() const noexcept {
     return "grade is too low";
 }
 
-const char* Form::FormAlreadySignedException::what() const noexcept {
+const char* AForm::FormAlreadySignedException::what() const noexcept {
     return "form is already signed";
 }
 
-std::ostream &operator<<( std::ostream& os, const Form& fm ) {
+const char* AForm::FormNotSignedException::what() const noexcept {
+    return "form is not signed";
+}
+
+std::ostream &operator<<( std::ostream& os, const AForm& fm ) {
     os << " " << std::endl;
     os << "=== " << fm.getName() << " ===" << std::endl;
     os << "Signed: " << fm.getSigned() << std::endl;
