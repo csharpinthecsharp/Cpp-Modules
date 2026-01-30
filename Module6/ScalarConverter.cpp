@@ -65,21 +65,21 @@ static bool handle_special( const std::string &str ) {
 
 static bool isIntOverflow( long value ) {
     if (value <= std::numeric_limits<int>::max() 
-        && value >= std::numeric_limits<int>::min()) 
+        && value >= std::numeric_limits<int>::lowest()) 
         return true;
     return false;
 }
 
 static bool isDoubleOverflow( long double value ) {
     if (value <= std::numeric_limits<double>::max() 
-        && value >= std::numeric_limits<double>::min()) 
+        && value >= std::numeric_limits<double>::lowest()) 
         return true;
     return false;
 }
 
 static bool isFloatOverflow( long double value ) {
     if (value <= std::numeric_limits<float>::max() 
-        && value >= std::numeric_limits<float>::min()) 
+        && value >= std::numeric_limits<float>::lowest()) 
         return true;
     return false;
 }
