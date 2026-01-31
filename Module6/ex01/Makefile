@@ -1,0 +1,33 @@
+NAME	= serializer
+CPP	= c++
+CFLAGS	= -std=c++98 -g -Wall -Wextra -Werror
+
+SRCS	= main.cpp \
+	  Serializer.cpp  \
+	  Data.cpp \
+
+OBJS	= $(SRCS:.cpp=.o)
+
+GREEN = \033[0;32m
+BOLD = \033[1m
+RESET = \033[0m
+
+all: $(NAME)
+	@echo ""
+	@echo "$(GREEN)$(BOLD) ==== ./serializer to run ====$(RESET)"
+	@echo ""
+
+$(NAME): $(OBJS)
+	$(CPP) $(CFLAGS) -o $(NAME) $(OBJS)
+
+clean:
+	rm -f $(OBJS)
+
+fclean: clean
+	rm -f $(NAME)
+	make clean
+
+re: fclean all
+
+.PHONY: all clean fclean re
+

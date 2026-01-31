@@ -189,7 +189,7 @@ static bool isDouble(const std::string& str)
 static bool isFloat(const std::string& str)
 {
     if (str.length() == 1 && isdigit(str[0])) return true;
-    for (int i(0), count(0); i < (str.length() - 2); i++) {
+    for (int i(0), count(0); i < (str.length() - 1); i++) {
         while (str[i] == ' ' || str[i] == '-' || str[i] == '+')
             i++;
         if (!isdigit(str[i])) {
