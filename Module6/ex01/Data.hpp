@@ -14,7 +14,7 @@ class Data {
         Data &operator=( const Data& da );
         ~Data();
 
-        const unsigned int getFiles() const;
+        unsigned int getFiles() const;
         const std::string getSubject() const;
 };
 

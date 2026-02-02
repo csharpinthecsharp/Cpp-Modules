@@ -1,6 +1,7 @@
 #include "ScalarConverter.hpp"
 #include <limits>
 #include <iomanip>
+#include <cstdlib>
 
 // START OF *
 // ScalarConvert is not instantiable, so it will never be printed.
@@ -18,6 +19,7 @@ ScalarConverter::ScalarConverter( const ScalarConverter& sr ) {
 }
 ScalarConverter &ScalarConverter::operator=( const ScalarConverter& sr ) {
     std::cout << "Scalar copy assignement operator  called" << std::endl;
+    (void)sr;
     return *this;
 }
 // END OF *
@@ -65,21 +67,21 @@ static bool handle_special( const std::string &str ) {
 
 static bool isIntOverflow( long value ) {
     if (value <= std::numeric_limits<int>::max() 
-        && value >= std::numeric_limits<int>::lowest()) 
+        && value >= std::numeric_limits<int>::min()) 
         return true;
     return false;
-}
+}long      strtol( const char* str, char** str_end, int base );
 
 static bool isDoubleOverflow( long double value ) {
     if (value <= std::numeric_limits<double>::max() 
-        && value >= std::numeric_limits<double>::lowest()) 
+        && value >= std::numeric_limits<double>::min()) 
         return true;
     return false;
 }
 
 static bool isFloatOverflow( long double value ) {
     if (value <= std::numeric_limits<float>::max() 
-        && value >= std::numeric_limits<float>::lowest()) 
+        && value >= std::numeric_limits<float>::min()) 
         return true;
     return false;
 }
@@ -164,7 +166,7 @@ static bool isChar( const std::string& str ) {
 
 static bool isInt( const std::string& str ) {
     if (str.length() == 1 && isdigit(str[0])) return true;
-    for (int i(0); i < str.length(); i++) {
+    for (size_t i(0); i < str.length(); i++) {
         while (str[i] == ' ' || str[i] == '-' || str[i] == '+')
             i++;
         if (!isdigit(str[i])) return false;
@@ -175,7 +177,7 @@ static bool isInt( const std::string& str ) {
 static bool isDouble(const std::string& str)
 {
     if (str.length() == 1 && isdigit(str[0])) return true;
-    for (int i(0), count(0); i < str.length(); i++) {
+    for (size_t i(0), count(0); i < str.length(); i++) {
         while (str[i] == ' ' || str[i] == '-' || str[i] == '+')
             i++;
         if (!isdigit(str[i])) {
@@ -189,7 +191,7 @@ static bool isDouble(const std::string& str)
 static bool isFloat(const std::string& str)
 {
     if (str.length() == 1 && isdigit(str[0])) return true;
-    for (int i(0), count(0); i < (str.length() - 1); i++) {
+    for (size_t i(0), count(0); i < (str.length() - 1); i++) {
         while (str[i] == ' ' || str[i] == '-' || str[i] == '+')
             i++;
         if (!isdigit(str[i])) {

@@ -20,17 +20,17 @@ Base* generate( void ) {
 }
 void identify( Base* p ) {
     Base* a_ptr = dynamic_cast<A*> (p);
-    if (a_ptr != nullptr) {
+    if (a_ptr != NULL) {
         std::cout << a_ptr << std::endl;
         return ;
     }
     Base* b_ptr = dynamic_cast<B*> (p);
-    if (b_ptr != nullptr) {
+    if (b_ptr != NULL) {
         std::cout << b_ptr << std::endl;
         return ;
     }
     Base* c_ptr = dynamic_cast<C*> (p);
-    if (c_ptr != nullptr) {
+    if (c_ptr != NULL) {
         std::cout << c_ptr << std::endl;
         return ;
     }

@@ -17,6 +17,9 @@ all: $(NAME)
 	@echo "$(GREEN)$(BOLD) ==== ./serializer to run ====$(RESET)"
 	@echo ""
 
+%.o: %.cpp
+	$(CPP) $(CFLAGS) -c $< -o $@
+
 $(NAME): $(OBJS)
 	$(CPP) $(CFLAGS) -o $(NAME) $(OBJS)
 

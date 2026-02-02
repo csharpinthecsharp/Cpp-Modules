@@ -30,7 +30,7 @@ Data::~Data() {
     std::cout << "Data destructor called" << std::endl;
 }
 
-const unsigned int Data::getFiles() const {
+unsigned int Data::getFiles() const {
     return this->_nb_files;
 }
 
