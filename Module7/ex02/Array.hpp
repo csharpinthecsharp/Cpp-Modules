@@ -8,9 +8,19 @@ template <typename T> class Array {
         T* _array;
         size_t _size;
     public:
-        Array() :_size(0) { _array = new T(_size); }
+        Array() :_size(0) {             
+            _array = new T[_size];
+            for (unsigned int i(0); i < _size; i++) {
+                _array[i] = T();
+            }
+        } 
 
-        Array( unsigned int n ) : _size(n) { _array = new T[_size]; }
+        Array( unsigned int n ) : _size(n) {
+            _array = new T[_size];
+            for (unsigned int i(0); i < _size; i++) {
+                _array[i] = T();
+            }
+        } 
 
         ~Array() { delete[] _array; }
 
@@ -19,7 +29,7 @@ template <typename T> class Array {
         Array &operator=( const Array& ay ) {
             if (this != &ay) {
                 this->_size = ay._size;
-                for (size_t i(0); i < this->_size; i++) {
+                for (unsigned int i(0); i < this->_size; i++) {
                     this->_array[i] = ay._array[i];
                 }
             }
@@ -45,7 +55,7 @@ template <typename T> class Array {
 };
 
 template <typename T> std::ostream& operator<<(std::ostream& os, const Array<T>& ay ) {
-    for (size_t i(0); i < ay.size(); i++) {
+    for (unsigned int i(0); i < ay.size(); i++) {
         os << ay[i];
         if (i + 1 != ay.size())
             os << std::endl;

@@ -1,12 +1,11 @@
 #include "Array.hpp"
 
-#define SIZE_IN_BOUNDS 10
-#define SIZE_OUT_OF_BOUNDS 1
+#define SIZE 10
 
 int main() {
-    Array<unsigned int> iArray(SIZE_IN_BOUNDS);
-    Array<std::string> sArray(SIZE_IN_BOUNDS);
-    Array<float> fArray(SIZE_IN_BOUNDS);
+    Array<unsigned int> iArray(SIZE);
+    Array<std::string> sArray(SIZE);
+    Array<float> fArray(SIZE);
     try {
         sArray.setArrayAtIndex("salut", 5);
         fArray.setArrayAtIndex(480.23f, 3);
