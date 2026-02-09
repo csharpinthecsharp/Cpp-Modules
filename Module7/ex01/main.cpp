@@ -25,6 +25,13 @@ int main( void ) {
     };
     size_t _cs_array = sizeof(_c_array) / sizeof(_c_array[0]);
 
+    class Test {
+        public:
+            void printtest() {
+                std::cout << "test" << std::endl;
+            }
+    };
+
     ::iter(_i_arr, _si_array, &exec);
     ::iter(_s_array, _ss_array, &exec);
     ::iter(_c_array, _cs_array, &exec);
