@@ -18,6 +18,7 @@ class Span {
         Span &operator=( const Span& sn );
 
         void addNumber( int nb );
+        void addNumbers( std::vector<int>::iterator f, std::vector<int>::iterator l);
         int shortestSpan() const;
         int longestSpan() const;
         std::vector<int> getContainer() const;

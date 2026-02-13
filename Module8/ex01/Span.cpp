@@ -27,6 +27,13 @@ void Span::addNumber( int nb ) {
     _container.push_back(nb);
 }
 
+void Span::addNumbers( std::vector<int>::iterator f, std::vector<int>::iterator l) {
+    if (_N == _container.size())
+        throw MaxElementsException();
+    _container.insert(_container.end(), f, l);
+}
+
+
 int Span::shortestSpan() const {
     if (_container.size() < 2)
         throw SpanBlankException();
