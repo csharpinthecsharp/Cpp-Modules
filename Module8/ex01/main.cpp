@@ -1,7 +1,7 @@
 #include "Span.hpp"
 
 int main() {
-        Span sn = Span(100);
+        Span sn = Span(10500);
         try { 
             for (size_t i(0); i < 5; i++)
                 sn.addNumber(i);
@@ -14,11 +14,8 @@ int main() {
         }
 
         std::vector<int> mlt;
-        mlt.push_back(3);
-        mlt.push_back(19);
-        mlt.push_back(12);
-        mlt.push_back(1);
-        mlt.push_back(5);
+        for (int i (0); i < 10000; i++)
+            mlt.push_back(i);
 
         try { 
             sn.addNumbers(mlt.begin(), mlt.end());
