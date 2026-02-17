@@ -38,22 +38,33 @@ std::fstream& BitcoinExchange::openStream( const std::string& input, std::fstrea
     return f;
 }
 
-void BitcoinExchange::fillContainer( std::fstream& f, std::vector<std::string>& container ) {
+void BitcoinExchange::fillContainer( std::fstream& f, std::map<std::string, float>& container ) {
     std::string line;
-    while (std::getline(f, line))
-        container.push_back(line);
+    while (std::getline(f, line)) {
+        std::string key;
+        std::string value;
+        std::size_t pos = line.find("|");
+        if (pos == std::string::npos) {
+            container[line] = BAD_INPUT;
+            continue;
+        }
+        key = line.substr(0, pos);
+        value = line.substr(pos + 1);
+
+        container[key] = static_cast<float>(strtod(value.c_str(), NULL));
+    }
 }
 
-std::vector<std::string> BitcoinExchange::getUserContainer() const {
+std::map<std::string, float> BitcoinExchange::getUserContainer() const {
     return this->_user_db;
 }
 
-std::vector<std::string> BitcoinExchange::getInternalContainer() const {
+std::map<std::string, float> BitcoinExchange::getInternalContainer() const {
     return this->_internal_db;
 }
 
 std::ostream& operator<<( std::ostream& os, const BitcoinExchange& be ) {
-    for (size_t i(0); i < be.getUserContainer().size(); i++)
-        os << be.getUserContainer().at(i) << std::endl;
+    for (std::map<std::string, float>::iterator it = be.getUserContainer().begin(); it != be.getUserContainer().end(); it++)
+        os << it->first << " | " << it->second << std::endl;
     return os;
 }

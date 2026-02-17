@@ -4,14 +4,18 @@
 #include <iostream>
 #include <fstream>
 #include <exception>
-#include <vector>
+#include <map>
 #include <algorithm>
+#include <string>
+#include <cstdlib>
+
+#define BAD_INPUT -1
 
 class BitcoinExchange {
     private:
         std::string _input;
-        std::vector<std::string> _internal_db;
-        std::vector<std::string> _user_db;
+        std::map<std::string, float> _internal_db;
+        std::map<std::string, float> _user_db;
     public:
         BitcoinExchange( const std::string& input );
         ~BitcoinExchange();
@@ -22,10 +26,9 @@ class BitcoinExchange {
         void calculation();
 
         std::fstream& openStream( const std::string& input, std::fstream& f );
-        void fillContainer( std::fstream& f, std::vector<std::string>& container );
-
-        std::vector<std::string> getUserContainer() const;
-        std::vector<std::string> getInternalContainer() const;
+        void fillContainer( std::fstream& f, std::map<std::string, float>& container );
+        std::map<std::string, float> getUserContainer() const;
+        std::map<std::string, float> getInternalContainer() const;
 
         class NoInputFileException : public std::exception {
             virtual const char* what() const throw() {
