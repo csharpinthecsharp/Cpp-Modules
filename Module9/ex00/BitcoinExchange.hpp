@@ -10,6 +10,8 @@
 #include <cstdlib>
 
 #define BAD_INPUT -1
+#define NOT_POSITIVE -2
+#define TOO_LARGE -3
 
 class BitcoinExchange {
     private:
@@ -27,8 +29,8 @@ class BitcoinExchange {
 
         std::fstream& openStream( const std::string& input, std::fstream& f );
         void fillContainer( std::fstream& f, std::map<std::string, float>& container );
-        std::map<std::string, float> getUserContainer() const;
-        std::map<std::string, float> getInternalContainer() const;
+        const std::map<std::string, float>& getUserContainer() const;
+        const std::map<std::string, float>& getInternalContainer() const;
 
         class NoInputFileException : public std::exception {
             virtual const char* what() const throw() {

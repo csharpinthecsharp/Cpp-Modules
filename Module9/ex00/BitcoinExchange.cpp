@@ -28,7 +28,8 @@ void BitcoinExchange::handleUserDataBase() {
 }
 
 void BitcoinExchange::calculation() {
-    
+    // Internal container value * User container value;
+    // If Internal don't have the User date, take the closest one.
 }
 
 std::fstream& BitcoinExchange::openStream( const std::string& input, std::fstream& f  ) {
@@ -43,28 +44,55 @@ void BitcoinExchange::fillContainer( std::fstream& f, std::map<std::string, floa
     while (std::getline(f, line)) {
         std::string key;
         std::string value;
-        std::size_t pos = line.find("|");
+
+        size_t pos_f_space = line.find_first_of(" \t\n\r\f\v");
+        std::remove_if(line.begin(), line.end(), isspace);
+
+        size_t pos = line.find("|");
         if (pos == std::string::npos) {
-            container[line] = BAD_INPUT;
+            container[line.substr(0, pos_f_space)] = BAD_INPUT;
             continue;
         }
+        
         key = line.substr(0, pos);
         value = line.substr(pos + 1);
 
-        container[key] = static_cast<float>(strtod(value.c_str(), NULL));
+        float res = static_cast<float>(strtod(value.c_str(), NULL));
+        if (res < 0) {
+            container[key] = NOT_POSITIVE; 
+            continue;
+        }
+        if (res > 1000) {
+            container[key] = TOO_LARGE; 
+            continue;
+        }
+        container[key] = res;
     }
 }
 
-std::map<std::string, float> BitcoinExchange::getUserContainer() const {
+const std::map<std::string, float>& BitcoinExchange::getUserContainer() const {
     return this->_user_db;
 }
 
-std::map<std::string, float> BitcoinExchange::getInternalContainer() const {
+const std::map<std::string, float>& BitcoinExchange::getInternalContainer() const {
     return this->_internal_db;
 }
 
 std::ostream& operator<<( std::ostream& os, const BitcoinExchange& be ) {
-    for (std::map<std::string, float>::iterator it = be.getUserContainer().begin(); it != be.getUserContainer().end(); it++)
-        os << it->first << " | " << it->second << std::endl;
+    for (std::map<std::string, float>::const_iterator it = be.getUserContainer().begin(); it != be.getUserContainer().end(); it++) {
+        switch (static_cast<int>(it->second)) {
+            case BAD_INPUT:
+                std::cout << "Error: bad input => " <<  it->first << std::endl;
+                break;
+            case NOT_POSITIVE:
+                std::cout << "Error: not a positive number." << std::endl;
+                break; 
+            case TOO_LARGE:
+                std::cout << "Error: too large a number." << std::endl;
+                break;
+            default:
+                os << it->first << "|" << it->second << std::endl;
+        }
+    }
     return os;
 }
