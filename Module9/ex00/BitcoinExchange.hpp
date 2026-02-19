@@ -12,6 +12,7 @@
 #define BAD_INPUT -1
 #define NOT_POSITIVE -2
 #define TOO_LARGE -3
+#define WRONG_DATE -4
 
 class BitcoinExchange {
     private:
@@ -26,7 +27,8 @@ class BitcoinExchange {
         void handleUserDataBase();
         void handleInternalDataBase();
         void calculation();
-
+        char getCsvFormat( const std::string& line );
+        float getValueOfPreviousDate( const std::string& date );
         std::fstream& openStream( const std::string& input, std::fstream& f );
         void fillContainer( std::fstream& f, std::map<std::string, float>& container );
         const std::map<std::string, float>& getUserContainer() const;
