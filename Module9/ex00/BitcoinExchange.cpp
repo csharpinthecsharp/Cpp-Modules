@@ -19,12 +19,12 @@ void BitcoinExchange::isGoodFormat( char **input, int size ) {
 
 void BitcoinExchange::handleInternalDataBase() {
     std::fstream temp;
-    fillContainer(openStream("data.csv", temp), _internal_db);
+    fillContainer(openStream("data.csv", temp), _internal_db, false);
 }
 
 void BitcoinExchange::handleUserDataBase() {
     std::fstream temp;
-    fillContainer(openStream(_input, temp), _user_db);
+    fillContainer(openStream(_input, temp), _user_db, true);
 }
 
 bool acceptDate( std::string date ) {
@@ -67,33 +67,30 @@ bool acceptDate( std::string date ) {
     return true;
 }
 
-float getValueOfPreviousDate( const std::string& date ) {
-
-}
-
 void BitcoinExchange::calculation() {
     // Internal container value * User container value;
     // If Internal don't have the User date, take the closest one.
-    std::map<std::string, float>::iterator it_itrl = _internal_db.begin();
-    std::map<std::string, float>::iterator it_user = _user_db.begin();
-    for (it_user; it_user != _user_db.end(); it_user++) {
+    for (std::map<std::string, float>::iterator it_user = _user_db.begin(); it_user != _user_db.end(); ++it_user) {
+        if (it_user->second == BAD_INPUT 
+            || it_user->second == NOT_POSITIVE 
+            || it_user->second == TOO_LARGE)
+            continue;
         if (!acceptDate(it_user->first)) {
             it_user->second = WRONG_DATE;
             continue;
         }
-        bool found = false;
-        it_itrl = _internal_db.begin();
-        for (it_itrl; it_itrl != _internal_db.end(); it_itrl++) {
-            if (it_itrl->first == it_user->first) {
-                found = true;
-                break;
+        std::map<std::string, float>::iterator it = _internal_db.lower_bound(it_user->first);
+
+        if (it != _internal_db.end() && it->first == it_user->first) {
+            it_user->second *= it->second;
+        } else {
+            if (it == _internal_db.begin()) {
+                it_user->second = WRONG_DATE;
+            } else {
+                --it;
+                it_user->second *= it->second;
             }
         }
-        if (found == false) {
-            it_user->second *= getValueOfPreviousDate(it_user->first);
-        }
-        else
-            it_user->second *= it_itrl->second;
     }
 }
 
@@ -115,7 +112,7 @@ char BitcoinExchange::getCsvFormat( const std::string& line ) {
     }
 }
 
-void BitcoinExchange::fillContainer( std::fstream& f, std::map<std::string, float>& container ) {
+void BitcoinExchange::fillContainer( std::fstream& f, std::map<std::string, float>& container, bool User ) {
     std::string line;
     std::getline(f, line);
     char search_char = getCsvFormat(line);
@@ -133,11 +130,11 @@ void BitcoinExchange::fillContainer( std::fstream& f, std::map<std::string, floa
         key = line.substr(0, pos);
         value = line.substr(pos + 1);
         float res = static_cast<float>(strtod(value.c_str(), NULL));
-        if (res < 0) {
+        if (User && res < 0) {
             container[key] = NOT_POSITIVE; 
             continue;
         }
-        if (res > 1000) {
+        if (User && res > 1000) {
             container[key] = TOO_LARGE; 
             continue;
         }
@@ -154,7 +151,7 @@ const std::map<std::string, float>& BitcoinExchange::getInternalContainer() cons
 }
 
 std::ostream& operator<<( std::ostream& os, const BitcoinExchange& be ) {
-    for (std::map<std::string, float>::const_iterator it = be.getUserContainer().begin(); it != be.getUserContainer().end(); it++) {
+    for (std::map<std::string, float>::const_iterator it = be.getUserContainer().begin(); it != be.getUserContainer().end(); ++it) {
         switch (static_cast<int>(it->second)) {
             case BAD_INPUT:
                 std::cout << "Error: bad input => " <<  it->first << std::endl;
@@ -164,6 +161,9 @@ std::ostream& operator<<( std::ostream& os, const BitcoinExchange& be ) {
                 break; 
             case TOO_LARGE:
                 std::cout << "Error: too large a number." << std::endl;
+                break;
+            case WRONG_DATE:
+                std::cout << "Error: date is wrong." << std::endl;
                 break;
             default:
                 os << it->first << " | " << it->second << std::endl;

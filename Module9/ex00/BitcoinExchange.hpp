@@ -28,9 +28,8 @@ class BitcoinExchange {
         void handleInternalDataBase();
         void calculation();
         char getCsvFormat( const std::string& line );
-        float getValueOfPreviousDate( const std::string& date );
         std::fstream& openStream( const std::string& input, std::fstream& f );
-        void fillContainer( std::fstream& f, std::map<std::string, float>& container );
+        void fillContainer( std::fstream& f, std::map<std::string, float>& container, bool User );
         const std::map<std::string, float>& getUserContainer() const;
         const std::map<std::string, float>& getInternalContainer() const;
 
