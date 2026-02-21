@@ -85,7 +85,7 @@ void BitcoinExchange::calculation() {
             it_user->second *= it->second;
         } else {
             if (it == _internal_db.begin()) {
-                it_user->second = WRONG_DATE;
+                it_user->second = NO_DATE_CLOSER;
             } else {
                 --it;
                 it_user->second *= it->second;
@@ -120,7 +120,7 @@ void BitcoinExchange::fillContainer( std::fstream& f, std::map<std::string, floa
         std::string key;
         std::string value;
         size_t pos_f_space = line.find_first_of(" \t\n\r\f\v");
-        std::remove_if(line.begin(), line.end(), isspace);
+        line.erase(std::remove_if(line.begin(), line.end(), isspace), line.end());
 
         size_t pos = line.find(search_char);
         if (pos == std::string::npos) {
@@ -164,6 +164,9 @@ std::ostream& operator<<( std::ostream& os, const BitcoinExchange& be ) {
                 break;
             case WRONG_DATE:
                 std::cout << "Error: date is wrong." << std::endl;
+                break;
+            case NO_DATE_CLOSER:
+                std::cout << "Error: no date closer." << std::endl;
                 break;
             default:
                 os << it->first << " | " << it->second << std::endl;

@@ -13,6 +13,7 @@
 #define NOT_POSITIVE -2
 #define TOO_LARGE -3
 #define WRONG_DATE -4
+#define NO_DATE_CLOSER -5
 
 class BitcoinExchange {
     private:
