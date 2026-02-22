@@ -71,24 +71,34 @@ void BitcoinExchange::calculation() {
     // Internal container value * User container value;
     // If Internal don't have the User date, take the closest one.
     for (std::map<std::string, float>::iterator it_user = _user_db.begin(); it_user != _user_db.end(); ++it_user) {
-        if (it_user->second == BAD_INPUT 
-            || it_user->second == NOT_POSITIVE 
-            || it_user->second == TOO_LARGE)
+        if (static_cast<int>(it_user->second) == BAD_INPUT) {
+            std::cout << "Error: bad input => " <<  it_user->first << std::endl;
             continue;
+        }
+        if (static_cast<int>(it_user->second) == NOT_POSITIVE) {
+            std::cout << "Error: not a positive number." << std::endl;
+            continue;
+        }
+        if (static_cast<int>(it_user->second) == TOO_LARGE) {
+            std::cout << "Error: too large a number." << std::endl;
+            continue;
+        }
         if (!acceptDate(it_user->first)) {
-            it_user->second = WRONG_DATE;
+            std::cout << "Error: date is wrong." << std::endl;
             continue;
         }
         std::map<std::string, float>::iterator it = _internal_db.lower_bound(it_user->first);
 
         if (it != _internal_db.end() && it->first == it_user->first) {
-            it_user->second *= it->second;
+            float temp = it_user->second * it->second;
+            std::cout << it_user->first << " => " << it_user->second << " = " << temp << std::endl;
         } else {
             if (it == _internal_db.begin()) {
-                it_user->second = NO_DATE_CLOSER;
+                std::cout << "Error: no date is closer." << std::endl;
             } else {
                 --it;
-                it_user->second *= it->second;
+                float temp = it_user->second * it->second;
+                std::cout << it_user->first << " => " << it_user->second << " = " << temp << std::endl;
             }
         }
     }
@@ -148,29 +158,4 @@ const std::map<std::string, float>& BitcoinExchange::getUserContainer() const {
 
 const std::map<std::string, float>& BitcoinExchange::getInternalContainer() const {
     return this->_internal_db;
-}
-
-std::ostream& operator<<( std::ostream& os, const BitcoinExchange& be ) {
-    for (std::map<std::string, float>::const_iterator it = be.getUserContainer().begin(); it != be.getUserContainer().end(); ++it) {
-        switch (static_cast<int>(it->second)) {
-            case BAD_INPUT:
-                std::cout << "Error: bad input => " <<  it->first << std::endl;
-                break;
-            case NOT_POSITIVE:
-                std::cout << "Error: not a positive number." << std::endl;
-                break; 
-            case TOO_LARGE:
-                std::cout << "Error: too large a number." << std::endl;
-                break;
-            case WRONG_DATE:
-                std::cout << "Error: date is wrong." << std::endl;
-                break;
-            case NO_DATE_CLOSER:
-                std::cout << "Error: no date closer." << std::endl;
-                break;
-            default:
-                os << it->first << " | " << it->second << std::endl;
-        }
-    }
-    return os;
 }

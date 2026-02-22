@@ -47,6 +47,4 @@ class BitcoinExchange {
         };
 };
 
-std::ostream& operator<<( std::ostream& os, const BitcoinExchange& be ); 
-
 #endif
