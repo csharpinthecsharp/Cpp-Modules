@@ -1,7 +1,9 @@
 #include "RPN.hpp"
 
-RPN::RPN() : _stack() {
-
+RPN::RPN( const std::string& list ) : _stack() {
+    if (list.empty()) 
+        throw EmptyListException();
+    addElements(list);
 }
 
 RPN::~RPN() {
@@ -13,7 +15,9 @@ RPN::RPN( const RPN& rn ) {
 }
 
 RPN &RPN::operator=( const RPN& rn ) {
-    (void)rn;
+    if (this != &rn) {
+        this->_stack = rn._stack;
+    }
     return *this;
 }
 
@@ -23,40 +27,48 @@ bool RPN::isValidElement( char elm ) {
     return false;
 }
 
+void RPN::handleNextSpace( const std::string& list, size_t *i ) {
+    if ((list.size() - 1) > *i) {
+        if (isspace(list[*i + 1]))
+            ++*i;
+        else
+            throw MissingSpaceBetweenElementsExpection();
+    }    
+}
+
 void RPN::addElements( std::string list ) {
     int a;
     int b;
     for (size_t i(0); list[i]; ++i) {
         if (isValidElement(list[i])) {
-            a = _stack.top();
-            _stack.pop();
-            b = _stack.top();
-            _stack.pop();
-            _stack.push(calculation(list[i], a, b));
+            a = this->_stack.top();
+            this->_stack.pop();
+            b = this->_stack.top();
+            this->_stack.pop();
+            this->_stack.push(calculation(list[i], a, b));
+            handleNextSpace(list, &i);
         }
-        else if (isspace(list[i]))
-            continue;
-        else if (isdigit(list[i]))
-            _stack.push(static_cast<int>(list[i] - '0'));
-        else {
-            std::cout << "Error: " << list[i] << std::endl;
-            exit(1);
+        else if (isdigit(list[i])) {
+            this->_stack.push(static_cast<int>(list[i] - '0'));
+            handleNextSpace(list, &i);
         }
+        else
+            throw WrongElementListException();
     }
 }
 
 int RPN::calculation( char elm, int a, int b) {
     switch (elm) {
     case '+':
-        return a + b;
+        return b + a;
     case '-':
-        return a - b;
+        return b - a;
     case '*':
-        return a * b;
+        return b * a;
     case '/':
-        return a / b;
+        return b / a;
     default:
-        return (0);
+        throw WrongElementListException();
     }   
 }
 
@@ -66,7 +78,7 @@ const std::stack<int>& RPN::getStack() const {
 
 
 std::ostream &operator<<( std::ostream& os, const RPN& rn ) {
-    os << rn.getStack().top() << std::endl;
+    os << rn.getStack().top();
     return os;
 }
 

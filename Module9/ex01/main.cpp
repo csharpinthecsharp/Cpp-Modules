@@ -5,7 +5,11 @@ int main(int ac, char **av) {
         std::cout << "Error" << std::endl;
         return 1;
     }
-    RPN rp;
-    rp.addElements(av[1]);
-    std::cout << rp << std::endl;
+    try {
+        RPN rp(av[1]);
+        std::cout << rp << std::endl;
+    }
+    catch ( std::exception & e ) {
+        std::cout << e.what() << std::endl;
+    } 
 }
