@@ -8,13 +8,20 @@ PmergeMe::~PmergeMe() {
 
 }
 
-std::vector<int>& PmergeMe::getVector() {
+
+void mergingVector();
+std::vector<PmergeMe::Pair>& PmergeMe::getVector() {
     return (this->_v_seq);
 }
  
 
-std::deque<int>& PmergeMe::getDeque() {
+std::deque<PmergeMe::Pair>& PmergeMe::getDeque() {
     return (this->_d_seq);
+}
+
+const PmergeMe::Pair& PmergeMe::getPair() const
+{
+    return this->_pair;
 }
 
 std::ostream &operator<<(std::ostream& os, const PmergeMe &other) {
