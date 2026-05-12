@@ -7,7 +7,7 @@ int main(int ac, char *av[]) {
     }
 
     PmergeMe pm;
-    PmergeMe::Pair p = pm.getPair();
+    PmergeMe::Pair p;
 
     for (int i(1); i < ac -1; i+=2) {
         int a = atoi(av[i]);
@@ -15,14 +15,15 @@ int main(int ac, char *av[]) {
         if (a <= 0 || b <= 0)
             throw "Error: Arguments list contains a non positive integer";
         if (a < b) {
-            p.a = b;
-            p.b = a;
-        }
-        else {
             p.a = a;
             p.b = b;
+        }
+        else {
+            p.a = b;
+            p.b = a;
         }
         pm.getVector().push_back(p);
         pm.getDeque().push_back(p);
     }
+    pm.mergingVector();
 }

@@ -17,12 +17,15 @@ class PmergeMe {
         Pair _pair;
     private:
         std::vector<Pair> _v_seq;
+        std::vector<int> _main;
+        std::vector<int> _wait;
         std::deque<Pair> _d_seq;
     public:     
         PmergeMe();
         ~PmergeMe();
 
         void mergingVector();
+        void buildMainChain();
         void InsertionVector();
         std::vector<Pair> &getVector();
 
