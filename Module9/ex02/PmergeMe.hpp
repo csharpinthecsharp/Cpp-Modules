@@ -24,8 +24,9 @@ class PmergeMe {
         PmergeMe();
         ~PmergeMe();
 
-        void mergingVector();
-        void buildMainChain();
+        void mergingVector(int start, int end);
+        void mergeRec(int left, int mid, int right);
+        void buildChain();
         void InsertionVector();
         std::vector<Pair> &getVector();
 
@@ -33,6 +34,7 @@ class PmergeMe {
         void InsertionDeque();
         std::deque<Pair> &getDeque();
 
+        const std::vector<int> &getMainVector() const;
         const Pair& getPair() const;
 };
 

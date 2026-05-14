@@ -12,8 +12,12 @@ int main(int ac, char *av[]) {
     for (int i(1); i < ac -1; i+=2) {
         int a = atoi(av[i]);
         int b = atoi(av[i + 1]);
-        if (a <= 0 || b <= 0)
-            throw "Error: Arguments list contains a non positive integer";
+        try {
+            if (a <= 0 || b <= 0)
+                throw std::invalid_argument("Arguments list contains a non positive integer");
+        } catch (const std::exception& e) {
+            std::cout << e.what() << std::endl;
+        }
         if (a < b) {
             p.a = a;
             p.b = b;
@@ -25,5 +29,8 @@ int main(int ac, char *av[]) {
         pm.getVector().push_back(p);
         pm.getDeque().push_back(p);
     }
-    pm.mergingVector();
+    pm.mergingVector(0, pm.getVector().size());
+    pm.buildChain();
+    pm.InsertionVector();
+    std::cout << pm;
 }

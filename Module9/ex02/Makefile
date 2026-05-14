@@ -13,7 +13,7 @@ RESET = \033[0m
 
 all: $(NAME)
 	@echo ""
-	@echo "$(GREEN)$(BOLD) ==== ./RPN to run ====$(RESET)"
+	@echo "$(GREEN)$(BOLD) ==== ./PmergeMe to run ====$(RESET)"
 	@echo ""
 
 %.o: %.cpp
