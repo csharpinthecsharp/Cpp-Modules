@@ -14,9 +14,10 @@ int main(int ac, char *av[]) {
         int b = atoi(av[i + 1]);
         try {
             if (a <= 0 || b <= 0)
-                throw std::invalid_argument("Arguments list contains a non positive integer");
+                throw PmergeMe::NonPositiveArgument();
         } catch (const std::exception& e) {
             std::cout << e.what() << std::endl;
+            return (-1);
         }
         if (a < b) {
             p.a = a;
@@ -29,8 +30,9 @@ int main(int ac, char *av[]) {
         pm.getVector().push_back(p);
         pm.getDeque().push_back(p);
     }
-    pm.mergingVector(0, pm.getVector().size());
-    pm.buildChain();
-    pm.InsertionVector();
+    pm.merging(pm.getVector(), 0, pm.getVector().size() - 1);
+    pm.buildChain(pm.getVector(), pm.getMainVector(), pm.getWaitVector());
+    pm.insertion(pm.getMainVector(), pm.getWaitVector());
+
     std::cout << pm;
 }
