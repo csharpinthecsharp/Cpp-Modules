@@ -6,6 +6,7 @@
 #include <iostream>
 #include <algorithm>
 #include <exception>
+#include <ctime>
 
 class PmergeMe {
     public:
@@ -23,6 +24,10 @@ class PmergeMe {
 
         std::vector<int> _v_wait;
         std::deque<int> _d_wait;
+
+        std::time_t d_time;
+        std::time_t v_time;
+        int _elm;
     public:     
         PmergeMe();
         ~PmergeMe();
@@ -40,6 +45,12 @@ class PmergeMe {
 
         std::vector<int> &getWaitVector();
         std::deque<int> &getWaitDeque();
+
+        void updateTime( std::time_t time, int flag );
+        std::time_t getTime( int flag ) const;
+
+        void updateElm( int n );
+        int getElm() const;
 
         class NonPositiveArgument : public std::exception {
             virtual const char* what() const throw() {
@@ -63,7 +74,7 @@ template <typename T> void PmergeMe::merging(T& container, int start, int end)
 }
 
 template <typename T> void PmergeMe::mergeRec(T& container, int left, int mid, int right) {
-    std::vector<Pair> temp(right - left + 1);
+    T temp(right - left + 1);
     int i = left, j = mid + 1, k = 0;
 
     while (i <= mid && j <= right) {
